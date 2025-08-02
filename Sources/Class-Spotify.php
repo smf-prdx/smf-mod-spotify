@@ -35,7 +35,7 @@ final class Spotify
             'validate' => function (&$tag, $data) {
                 global $txt;
 
-                if (strpos($text, 'open.spotify.com') !== false || strpos($text, 'spotify.link') !== false) {
+                if (strpos($data, 'open.spotify.com') !== false || strpos($data, 'spotify.link') !== false) {
                     $tag['content'] = self::getSpotifyEmbed($data);
                 } else {
                     $tag['content'] = '<div class="errorbox">' . $txt['spotify_link_error'] . '</div>';
