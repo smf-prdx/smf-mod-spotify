@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package-info xmlns="http://www.simplemachines.org/xml/package-info">
+    <id>prdx:spotify</id>
+    <name>Spotify embed BBCode</name>
+    <version>1.0.0</version>
+    <type>modification</type>
+    <install for="2.1.*">
+        <readme lang="english" parsebbc="false" type="file">README.md</readme>
+        <license type="file" parsebbc="false">LICENSE</license>
+        <hook hook="integrate_pre_load" function="Spotify::hooks#" file="$sourcedir/Class-Spotify.php" />
+        <require-file name="Sources/Class-Spotify.php" destination="$sourcedir" />
+        <require-dir name="Languages/Spotify" destination="$languagedir" />
+        <require-file name="Themes/default/images/bbc/spotify.png" destination="$themedir/images/bbc" />
+    </install>
+
+    <uninstall for="2.1.*">
+        <hook hook="integrate_pre_load" function="Spotify::hooks#" file="$sourcedir/Class-Spotify.php" reverse="true" />
+        <remove-file name="$sourcedir/Class-Spotify.php" />
+        <remove-file name="$themedir/images/bbc/spotify.png" />
+        <remove-dir name="$languagedir/Spotify" />
+    </uninstall>
+</package-info>
