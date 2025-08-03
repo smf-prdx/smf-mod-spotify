@@ -59,7 +59,7 @@ final class Spotify
         ];
     }
 
-    public static function getSpotifyEmbed(string $url): ?string
+    public static function getSpotifyEmbed(string $data): ?string
     {
         global $txt;
 
@@ -71,6 +71,7 @@ final class Spotify
         $ttl = 86400; // Cache TTL in seconds (1 day)
 
         // Sanitize URL to use as cache key
+        $url = trim($data);
         $cache_key = 'spotify_' . md5($url);
 
         // Try to get from cache first
