@@ -36,7 +36,7 @@ final class Spotify
                 global $txt;
 
                 if (strpos($data, 'open.spotify.com') !== false || strpos($data, 'spotify.link') !== false) {
-                    $tag['content'] = self::getSpotifyEmbed($data);
+                    $tag['content'] = self::getSpotifyEmbed($data) . '<span style="display:none">.</span>';
                 } else {
                     $tag['content'] = '<div class="errorbox">' . $txt['spotify_link_error'] . '</div>';
                 }
@@ -59,7 +59,7 @@ final class Spotify
         ];
     }
 
-    public static function getSpotifyEmbed(string $url): ?string
+    public static function getSpotifyEmbed(string $data): ?string
     {
         global $txt;
 
@@ -71,6 +71,7 @@ final class Spotify
         $ttl = 86400; // Cache TTL in seconds (1 day)
 
         // Sanitize URL to use as cache key
+        $url = trim($data);
         $cache_key = 'spotify_' . md5($url);
 
         // Try to get from cache first
