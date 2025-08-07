@@ -22,11 +22,22 @@ final class Spotify
         add_integration_function('integrate_bbc_buttons', __CLASS__ . '::bbcButtons#', false, __FILE__);
     }
 
+    private static function localLoadLanguage(string $template = 'Spotify/'): void
+    {
+        $is_package_area = isset($_GET['action'], $_GET['area']) &&
+            $_GET['action'] === 'admin' &&
+            $_GET['area'] === 'packages';
+
+        // if we're in package area (installing or uninstalling), do not consider a fatal error if it can't be loaded
+        // because the language file may not exist in that case.
+        loadLanguage($template, '', !$is_package_area);
+    }
+
     public function bbcCodes(array &$codes): void
     {
         global $txt;
 
-        loadLanguage('Spotify/');
+        self::localLoadLanguage();
 
         $codes[] = [
             'tag' => 'spotify',
@@ -48,7 +59,7 @@ final class Spotify
     {
         global $txt;
 
-        loadLanguage('Spotify/');
+        self::localLoadLanguage();
 
         $buttons[count($buttons) - 1][] = [
             'image'       => 'spotify',
@@ -63,7 +74,7 @@ final class Spotify
     {
         global $txt;
 
-        loadLanguage('Spotify/');
+        self::localLoadLanguage();
 
         $maxRetries = 5; // Maximum number of retries
         $retryDelay = 200000; // Delay in microseconds (200ms)
