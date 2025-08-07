@@ -2,7 +2,7 @@
 <package-info xmlns="http://www.simplemachines.org/xml/package-info">
     <id>prdx:spotify</id>
     <name>Spotify embed BBCode</name>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <type>modification</type>
     <install for="2.1.*">
         <readme lang="english" parsebbc="false" type="file">README.md</readme>
