@@ -43,9 +43,7 @@ final class Spotify
             'tag' => 'spotify',
             'type' => 'unparsed_content',
             'block_level' => true,
-            'validate' => function (&$tag, $data) {
-                global $txt;
-
+            'validate' => function (&$tag, $data) use ($txt) {
                 if (strpos($data, 'open.spotify.com') !== false || strpos($data, 'spotify.link') !== false) {
                     $tag['content'] = self::getSpotifyEmbed($data) . '<span style="display:none">.</span>';
                 } else {
@@ -117,6 +115,6 @@ final class Spotify
                 return $json['html'];
             }
         }
-        return '<div class="errorbox">'. $txt['spotify_cant_load_url'] .'</div>';;
+        return '<div class="errorbox">'. $txt['spotify_cant_load_url'] .'</div>';
     }
 }
